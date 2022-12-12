@@ -1,5 +1,6 @@
 //Mongoose Schema for Quizquestion Object
-const mongoose = require('mongoose');
+import Answer from "./quizanswer.model";
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 let Quizquestion = new Schema ({
