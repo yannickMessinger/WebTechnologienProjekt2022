@@ -14,7 +14,10 @@ let Quizquestion = new Schema ({
         type: [Answer]
     },
     correct_answer:{
-        type:String
+        type: String
+    },
+    hints: {
+        type: [String]
     }
 });
 
