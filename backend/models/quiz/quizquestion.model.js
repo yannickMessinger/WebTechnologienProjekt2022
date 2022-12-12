@@ -1,4 +1,4 @@
-//Mongoose Schema for Todo Object
+//Mongoose Schema for Quizquestion Object
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -10,7 +10,7 @@ let Quizquestion = new Schema ({
         type: String
     },
     possible_answers: {
-        type: [String]
+        type: [Answer]
     },
     correct_answer:{
         type:String

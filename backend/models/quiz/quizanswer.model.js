@@ -1,4 +1,4 @@
-//Mongoose Schema for Todo Object
+//Mongoose Schema for Quizanswer Object
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
