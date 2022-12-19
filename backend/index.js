@@ -31,9 +31,23 @@ const io = new Server(server, {
     }
 })
 
+io.on("connection", (socket) => {
+    console.log(`User connected with SocketID: ${socket.id}`);
+
+    socket.on("send_message", (message) => {
+        console.log(message.payload);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("User disconnected :(");
+    });
+})
+
+
+
 //Idiomatic expression in express to route and respond to a client request
 app.get('/', (req, res) => {        //get requests to the root ("/") will route here
-    res.sendFile('index.html', {root: __dirname});      //server responds by sending the index.html file to the client's browser
+    //res.sendFile('index.html', {root: __dirname});      //server responds by sending the index.html file to the client's browser
                                                         //the .sendFile method needs the absolute path to the file, see: https://expressjs.com/en/4x/api.html#res.sendFile
 });
 
