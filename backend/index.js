@@ -34,9 +34,18 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log(`User connected with SocketID: ${socket.id}`);
 
-    socket.on("send_message", (message) => {
-        console.log(message.payload);
+    
+    socket.on("chat_message_frontend", (message) => {
+        //to all connected clients
+        console.log(message.date)
+       io.emit("chat_message_backend", {payload: message.payload, date:message.date})
     });
+
+    /*
+    socket.on("chat_message_frontend", (message) => {
+        //To all connected clients except the sender
+       socket.broadcast.emit("chat_message_backend", {payload: message.payload})
+    });*/
 
     socket.on("disconnect", () => {
         console.log("User disconnected :(");
