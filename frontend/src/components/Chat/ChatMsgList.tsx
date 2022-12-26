@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
-//import { ChatMessage, useChat } from '../../hooks/useChat'
+import {ChatMessage} from '../../hooks/useChat'
 
 //wie kann man das machen, das man aus useChat hook nur eine Instanz zurück bekommt und so die Liste auslagern kann?????
+interface ChatMessageLstProps{
+  msglist : Array<ChatMessage>
+}
 
 
-
-export const ChatMsgList = () => {
-
-  //const {sendChatMsg, msglist} = useChat();
-  const msglist:any = []
+export const ChatMsgList = ({msglist}:ChatMessageLstProps) => {
   return (
     <>
      <div>

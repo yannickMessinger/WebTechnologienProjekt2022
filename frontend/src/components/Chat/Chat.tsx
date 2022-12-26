@@ -4,7 +4,7 @@ import { ChatMsgList } from "./ChatMsgList";
 import css from "./Chatstyle.module.css";
 
 export const Chat = () => {
-  const { sendChatMsg, msglist } = useChat();
+  const { sendChatMsg,msglist } = useChat();
 
   const [messageContent, setMessageContent] = useState("");
 
@@ -31,13 +31,7 @@ export const Chat = () => {
       >
         send message
       </button>
-      <div>
-        <ul>
-          {msglist.map((msg) => {
-            return <li>{msg.content}</li>;
-          })}
-        </ul>
-      </div>
+      <ChatMsgList msglist={msglist} />
     </div>
   );
 };
