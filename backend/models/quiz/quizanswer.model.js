@@ -9,7 +9,6 @@ let Answer = new Schema ({
     answer_content: {
         type: String
     },
-   
 });
 
-module.exports = mongoose.model('Answer', Answer)
+module.exports = mongoose.model('Answer', Answer);
