@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSocket } from "./useSocket";
 
 export interface ChatMessage {
-  date: Date;
+  username: string;
   content: string;
 }
 
@@ -31,19 +31,19 @@ export const useChat = () => {
 
   socket.on("chat_message_backend", (message) => {
     console.log(
-      `Message an alle: Datum${new Date(message.date)} Msg: ${message.payload}`
+      `Message an alle: Username${message.username} Msg: ${message.payload}`
     );
     setMsglist([
       ...msglist,
-      { date: new Date(message.date), content: message.payload },
+      { username: message.username, content: message.payload },
     ]);
     console.log(msglist);
   });
 
   function sendChatMsg(msg: ChatMessage) {
     socket.emit("chat_message_frontend", {
-      payload: msg.content,
-      date: msg.date,
+      username: msg.username,
+      payload: msg.content
     });
   }
 

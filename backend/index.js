@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
     socket.on("chat_message_frontend", (message) => {
         //to all connected clients
         
-       io.emit("chat_message_backend", {payload: message.payload, date:message.date})
+       io.emit("chat_message_backend", { username:message.username, payload: message.payload})
     });
 
     /*
