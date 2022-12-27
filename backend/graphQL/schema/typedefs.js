@@ -1,23 +1,28 @@
-import { gql } from "apollo-server-express";
-const typedefs = gql`
-    type Quiz {
-        quiz_id: ID
-        quizquestions: [Quizquestions]
-        category: [String]
-    }
-    type Quizquestions {
-        question_id: ID
-        question_content: String
-        possible_answers: [Answer]
-        correct_answer: Answer
-        hints: [String]
-    }
-    type Answer {
-        answer_id: ID
-        answer_content: String
+import {gql} from "apollo-server-express";
+
+const typeDefs = gql`
+    type Question {
+        _id: String,
+        question: String,
+        possibleAnswers: [String],
+        correctAnswer: String,
+        category: String,
+        hint: [String],
     }
     type Query {
-        getRandomCategories: [String]
-        getRandomQuizByCategory(category: String): Quiz
+        quizCategory (category: String): [Question]
+        categories: [String]
+        hint (questionId: String): String
+    }
+    type Mutation {
+        createQuestion (
+            question: String,
+            possibleAnswers: [String],
+            correctAnswer: String,
+            category: String,
+            hint: String
+        ) : Question
     }
 `
+
+export default typeDefs;

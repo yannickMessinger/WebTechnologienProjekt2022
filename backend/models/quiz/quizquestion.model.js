@@ -1,5 +1,4 @@
 //Mongoose Schema for Quizquestion Object
-import Answer from "./quizanswer.model";
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
@@ -11,7 +10,7 @@ let Quizquestion = new Schema ({
         type: String
     },
     possible_answers: {
-        type: [Answer]
+        type: [{answer_id: String, answer_content: String}]
     },
     correct_answer:{
         type: String
@@ -21,4 +20,4 @@ let Quizquestion = new Schema ({
     }
 });
 
-module.exports = mongoose.model('Quizquestion', Quizquestion)
+export default mongoose.model('Quizquestion', Quizquestion)

@@ -11,4 +11,4 @@ let Answer = new Schema ({
     },
 });
 
-module.exports = mongoose.model('Answer', Answer)
+module.exports = mongoose.model('Answer', Answer);
