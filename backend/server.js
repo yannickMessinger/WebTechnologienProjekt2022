@@ -9,6 +9,12 @@ import typeDefs from "./graphql/schema/typedefs.js";
 import resolvers from "./graphql/schema/resolvers.js";
 import { ApolloServer } from "apollo-server-express";
 import dotenv from 'dotenv';
+import Quiz from './models/quiz/quiz.model.js'
+import Question from './models/quiz/question.js'
+
+
+
+
  
 const app = express();
 //Instantiate an express app, the main work horse of this server
@@ -17,7 +23,11 @@ const port = 4000; //Save the port number where your server will be listening
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
- 
+
+
+const quizRoutes = express.Router()
+app.use('/quiz', quizRoutes);
+
 const server = http.createServer(app);
  
 
@@ -61,12 +71,7 @@ io.on("connection", (socket) => {
   });
 });
  
-//Idiomatic expression in express to route and respond to a client request
-app.get("/", (req, res) => {
-  //get requests to the root ("/") will route here
-  //res.sendFile('index.html', {root: __dirname});      //server responds by sending the index.html file to the client's browser
-  //the .sendFile method needs the absolute path to the file, see: https://expressjs.com/en/4x/api.html#res.sendFile
-});
+
  
 app.post("/auth/signup", (req, res) => {});
  
@@ -108,3 +113,18 @@ async function initServer() {
     }
     app.listen(PORT, () => console.log(`GraphQL Server running on Port ${PORT}`))
 }
+
+
+quizRoutes.route('/add').post((req, res) => {
+  console.log(req.body)
+ 
+  let quizQuestion = new Question(req.body);
+
+  req.body.possible_answers.forEach((answer) =>{
+    quizQuestion.possibleAnswers.push(answer);
+  })
+
+  
+
+  console.log(quizQuestion)
+});
