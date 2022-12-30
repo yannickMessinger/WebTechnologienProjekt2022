@@ -40,7 +40,7 @@ const resolvers = {
 
   Subscription: {
     newQuestion: {
-      subscribe: ({ pubsub }) => pubsub.asyncIterator(NEW_QUESTION),
+      subscribe: (_,__,{ pubsub }) => pubsub.asyncIterator(NEW_QUESTION),
     },
   },
 };
