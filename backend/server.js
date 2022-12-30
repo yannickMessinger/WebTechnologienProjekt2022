@@ -4,6 +4,14 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 
+//import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { createServer } from 'http';
+
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import bodyParser from 'body-parser';
 
 import typeDefs from "./graphql/schema/typedefs.js";
 import resolvers from "./graphql/schema/resolvers.js";
@@ -12,8 +20,11 @@ import dotenv from 'dotenv';
 import Quiz from './models/quiz/quiz.model.js'
 import Question from './models/quiz/question.js'
 
+//import resolvers from './resolvers';
+//import typeDefs from './typeDefs';
 
 
+const schema = makeExecutableSchema({ typeDefs, resolvers});
 
  
 const app = express();
@@ -28,8 +39,15 @@ app.use(express.urlencoded({ extended: true }));
 const quizRoutes = express.Router()
 app.use('/quiz', quizRoutes);
 
-const server = http.createServer(app);
- 
+//const server = http.createServer(app);
+const server = createServer(app); 
+
+const wsServer = new WebSocketServer({
+  server: server,
+  path: '/graphql',
+});
+
+useServer({ schema }, wsServer);
 
 mongoose.connect("mongodb://127.0.0.1:27017/quiz", { useNewUrlParser: true });
 const connection = mongoose.connection;
@@ -94,10 +112,11 @@ async function initServer() {
     app.use(cors());
     dotenv.config();
     const apolloServer = new ApolloServer({
-        typeDefs, resolvers
+        typeDefs, resolvers,schema
     });
     await apolloServer.start();
     apolloServer.applyMiddleware({app});
+    app.use('/graphql', bodyParser.json(), expressMiddleware(apolloServer));
     app.use((req, res) => {
         res.send("Server started");
     });

@@ -23,6 +23,9 @@ const typeDefs = gql`
             hint: String
         ) : Question
     }
+    type Subscription {
+        newQuestion: String
+    }
 `
 
 export default typeDefs;
