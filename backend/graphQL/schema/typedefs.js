@@ -1,6 +1,6 @@
 import {gql} from "apollo-server-express";
 
-const typeDefs = gql`
+export const typeDefs = gql`
     type Question {
         _id: String,
         question: String,
@@ -28,4 +28,3 @@ const typeDefs = gql`
     }
 `
 
-export default typeDefs;
