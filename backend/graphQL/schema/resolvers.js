@@ -4,7 +4,7 @@ import User from "../../models/user/user.model.js";
 const NEW_QUESTION = "NEW_QUESTION";
 const pubsub = new PubSub();
 
-const resolvers = {
+export const resolvers = {
   Query: {
     quizCategory: async (category) => {
       const questions = await Question.find({ category: category }).exec();
@@ -40,9 +40,8 @@ const resolvers = {
 
   Subscription: {
     newQuestion: {
-      subscribe: (_,__,{ pubsub }) => pubsub.asyncIterator(NEW_QUESTION),
+      subscribe: () => pubsub.asyncIterator([NEW_QUESTION]),
     },
   },
 };
 
-export default resolvers;
