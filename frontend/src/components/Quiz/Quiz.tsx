@@ -8,7 +8,7 @@ import css from "./Quizstyle.module.css";
 export const Quiz = () => {
   const question: IQuizquestion = {
     question: "",
-    possible_answers: [],
+    possibleAnswers: [],
     correct_answer: "",
     category: "",
     hint: "",
@@ -29,7 +29,7 @@ export const Quiz = () => {
     question.hint = hint;
 
     answers.split(" ").forEach((answer) => {
-      question.possible_answers.push(answer);
+      question.possibleAnswers.push(answer);
     });
 
     console.log(question)
