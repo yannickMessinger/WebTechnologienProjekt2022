@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <h3>ÄPP</h3>
       <Chat></Chat>
-      <Quiz></Quiz>
+      
     </div>
   );
 }

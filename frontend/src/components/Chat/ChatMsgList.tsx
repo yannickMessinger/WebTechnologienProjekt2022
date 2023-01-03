@@ -1,5 +1,5 @@
 import { ChatMessage } from "../../hooks/useChat";
-
+import css from "./Chatstyle.module.css";
 //wie kann man das machen, das man aus useChat hook nur eine Instanz zurück bekommt und so die Liste auslagern kann?????
 interface ChatMessageLstProps {
   msglist: Array<ChatMessage>;
@@ -9,7 +9,7 @@ interface ChatMessageLstProps {
 export const ChatMsgList = ({ msglist, username }: ChatMessageLstProps) => {
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center", width: '100%'}}>
+      <div className={css.chatlist}>
         <ul>
           {msglist.map((msg: ChatMessage) => {
             return (
