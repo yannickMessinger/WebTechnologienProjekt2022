@@ -7,6 +7,7 @@ export const Chat = () => {
   const { sendChatMsg, msglist } = useChat();
   const [user, setUser] = useState({ username: "", chatContent: "" });
   const [showSetUserButton, setshowSetUserButton] = useState(true);
+  const [showChat, setShowChat] = useState(false);
 
   const [messageContent, setMessageContent] = useState("");
   //const user {}... useState
@@ -16,58 +17,73 @@ export const Chat = () => {
     setMessageContent("");
   };
 
+  const toggleDisp = () => {
+    setShowChat(!showChat);
+  };
+
   return (
-    <div className={css.chatWindowWrapper}>
-      <div className={css.header}>
-        <h3>CHAT</h3>
-        <h4>Username:{user.username}</h4>
+    <div className={css.chatWindowOuterWrapper}>
+      <button
+        onClick={() => {
+          toggleDisp();
+        }}
+      >
+        {showChat ? '\u25B2' : '\u25BC'}
+      </button>
+      {showChat && (
+        <div className={css.chatWindowWrapper}>
+          <div className={css.header}>
+            <h3>CHAT</h3>
+            <h4>Username:{user.username}</h4>
 
-        {showSetUserButton ? (
-          <div>
-            <input
-              placeholder="Username"
-              value={user.username}
-              onChange={(e) => {
-                setUser({ ...user, username: e.target.value });
-              }}
-            ></input>
-            <button
-              onClick={() => {
-                setshowSetUserButton(!showSetUserButton)
-              }}
-            >
-              set Username
-            </button>
+            {showSetUserButton ? (
+              <div>
+                <input
+                  placeholder="Username"
+                  value={user.username}
+                  onChange={(e) => {
+                    setUser({ ...user, username: e.target.value });
+                  }}
+                ></input>
+                <button
+                  onClick={() => {
+                    setshowSetUserButton(!showSetUserButton);
+                  }}
+                >
+                  set Username
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
-        ) : (
-          <div></div>
-        )}
-      </div>
 
-      <ChatMsgList msglist={msglist} username={user.username} />
+          <ChatMsgList msglist={msglist} username={user.username} />
 
-      {user.username !== "" ? (
-        <div className={css.footer}>
-          <input
-            placeholder="message"
-            value={messageContent}
-            onChange={(e) => {
-              setMessageContent(e.target.value);
-            }}
-          ></input>
-          <button
-            onClick={() => {
-              sendMessage();
-            }}
-          >
-            send message
-          </button>
+          {user.username !== "" ? (
+            <div className={css.footer}>
+              <input
+                placeholder="message"
+                value={messageContent}
+                onChange={(e) => {
+                  setMessageContent(e.target.value);
+                }}
+              ></input>
+              <button
+                onClick={() => {
+                  sendMessage();
+                }}
+              >
+                send message
+              </button>
 
-          <br></br>
-        </div>
-      ) : (
-        <div className={css.footer}>
-          <p>Bitte Username eingebe!!</p>
+              <br></br>
+            </div>
+          ) : (
+            <div className={css.footer}>
+              <p>Bitte Username eingebe!!</p>
+            </div>
+          )}
         </div>
       )}
     </div>

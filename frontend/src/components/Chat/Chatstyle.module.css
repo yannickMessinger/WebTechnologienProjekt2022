@@ -1,18 +1,20 @@
-
+.chatWindowOuterWrapper{
+    background-color: darkgray;
+    max-width: 300px;
+    max-height:600px;
+    padding: 2%;
+    margin: 100px;
+}
 
 
 .chatWindowWrapper {
-    background-color: lightgrey;
     display: grid; 
     grid-auto-columns: 1fr; 
     grid-template-rows: 0.6fr 1.8fr 0.6fr; 
     gap: 0px 0px; 
     justify-items: end; 
-    width: 300px;
-    height:500px;
-    padding: 2%;
-    margin: 100px;
-  }
+}
+
   .header {
    
     grid-area: 1 / 1 / 2 / 2; 
@@ -62,4 +64,8 @@ input{
 
 button{
     width:53%
+}
+
+.showChatAndFooter{
+    display: none;
 }

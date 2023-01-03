@@ -22,7 +22,7 @@ export const ChatMsgList = ({ msglist, username }: ChatMessageLstProps) => {
                 }}
               >
                 {username !== msg.username && (
-                  <div style={{height:'50px', width:'50px', marginRight:'0.5em', border:'2px solid lightblue', borderRadius: 25, textAlign:'center', fontSize:'18pt', paddingTop: 5}}>
+                  <div style={{height:'30px', width:'30px', marginRight:'0.5em', border:'2px solid lightblue', borderRadius: 25, textAlign:'center', fontSize:'18pt', padding: 5}}>
                     {msg.username.slice(0,2).toUpperCase()}
                   </div>
                 )}
@@ -31,9 +31,10 @@ export const ChatMsgList = ({ msglist, username }: ChatMessageLstProps) => {
                     backgroundColor:
                       username === msg.username ? "green" : "gray",
                     color: username === msg.username ? "white" : "black",
-                    padding: "1em",
+                    padding: "0.5em",
                     borderRadius: "1em",
                     maxWidth: "60%",
+                    marginRight: 10
                   }}
                 >
                   {msg.content}
