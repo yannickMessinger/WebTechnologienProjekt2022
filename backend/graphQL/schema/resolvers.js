@@ -6,8 +6,8 @@ const pubsub = new PubSub();
 
 export const resolvers = {
   Query: {
-    quizCategory: async (category) => {
-      const questions = await Question.find({ category: category }).exec();
+    quizCategory: async (root, args) => {
+      const questions = await Question.find({ category: args.category }).exec();
       return questions;
     },
     categories: async () => {
