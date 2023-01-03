@@ -28,17 +28,18 @@ const startServer = async () => {
   const httpServer = http.createServer(app);
   const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-  quizRoutes.route('/add').post((req, res) => {
-    let question = new Question(req.body);
-    console.log("question:", question);
-    question.save()
-        .then(question => {
-            res.status(200).json({'question': 'question added successfully'});
-        })
-        .catch(err => {
-            res.status(400).send('adding new question failed');
-        });
-});
+   quizRoutes.route('/add').post((req, res) => {
+        let question = new Question(req.body);
+        resolvers.Mutation.createQuestion(null, question);
+        console.log("question:", question);
+        question.save()
+            .then(question => {
+                res.status(200).json({'question': 'question added successfully'});
+            })
+            .catch(err => {
+                res.status(400).send('adding new question failed');
+            });
+    });
 
   app.use("/quiz", quizRoutes);
   
