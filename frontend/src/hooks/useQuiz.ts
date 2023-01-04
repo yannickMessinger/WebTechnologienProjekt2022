@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { IQuizquestion } from '../typings/Quizquestion';
 
 export const useQuiz = () => {
+  const [quizQuestions, setQuizQuestions] = useState<IQuizquestion[]>([])
   
     async function postQuizQuestion(question:IQuizquestion){
         try {
@@ -28,10 +29,8 @@ export const useQuiz = () => {
   
   
   
-  
-  
     return {
-        postQuizQuestion
+        postQuizQuestion,
     }
     
   
