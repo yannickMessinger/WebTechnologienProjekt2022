@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import logo from './logo.svg';
 //import './App.css';
 import { Chat } from './components/Chat/Chat';
-import { Quiz } from './components/Quizquestion/Quiz';
+import { Quizquestion } from './components/Quizquestion/Quizquestion';
+import { AddQuiz } from './components/Quiz/AddQuiz';
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 
 
 
@@ -12,8 +14,11 @@ function App() {
  
   return (
     <div className="App">
-      <h3>ÄPP</h3>
-      <Quiz></Quiz>
+      <h3>QUIZ-ÄPP</h3>
+      
+    <AddQuiz></AddQuiz>
+
+   
       
     </div>
   );

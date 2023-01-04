@@ -15,6 +15,7 @@ import { resolvers } from "./graphQL/schema/resolvers.js";
 import { typeDefs } from "./graphQL/schema/typedefs.js";
 import { Server } from "socket.io";
 import Question from "./models/quiz/question.js";
+import Quiz from "./models/quiz/quiz.model.js";
 
 
 
@@ -30,8 +31,19 @@ const startServer = async () => {
 
    quizRoutes.route('/add').post((req, res) => {
         let question = new Question(req.body);
+        Quiz.findById(question.quizId, (err, Quiz) => {
+          Quiz.quiz_questions.push(question)
+          Quiz.save().then(() => {
+            console.log("Quizfrage zu quiz geaddet un gespeichert")
+          })
+          console.log(Quiz.quiz_questions)
+        })
+      
+      
         resolvers.Mutation.createQuestion(null, question);
-        console.log("question:", question);
+        //console.log("question:", question);
+        //console.log(question.quizId)
+        
         question.save()
             .then(question => {
                 res.status(200).json({'question': 'question added successfully'});
@@ -40,6 +52,20 @@ const startServer = async () => {
                 res.status(400).send('adding new question failed');
             });
     });
+
+    quizRoutes.route('/add/newquiz').get((req, res) => {
+      let quiz = new Quiz();
+      //console.log(quiz._id)
+     
+      quiz.save()
+          .then(quiz => {
+              console.log('new quiz added successfully')
+              res.status(200).json({'newQuizId': quiz._id});
+          })
+          .catch(err => {
+              res.status(400).send('adding new quiz failed');
+          });
+  });
 
   app.use("/quiz", quizRoutes);
   

@@ -3,17 +3,21 @@ import { useQuiz } from "../../hooks/useQuiz";
 import { IQuizquestion } from "../../typings/Quizquestion";
 import css from "./Quizstyle.module.css";
 
+interface Questionprops {
+  quizId: string
+}
 
 
-export const Quiz = () => {
+export const Quizquestion = ({quizId} : Questionprops) => {
   const question: IQuizquestion = {
-    question: "",
-    possibleAnswers: [],
+    quizId: "",
+    question_content: "",
+    possible_answers: [],
     correct_answer: "",
     category: "",
     hint: "",
   };
-  const { postQuizQuestion } = useQuiz();
+  const { postQuizQuestion} = useQuiz();
   const [questionContent, setQuestionContent] = useState("");
   const [answers, setAnswers] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -23,14 +27,16 @@ export const Quiz = () => {
 
   const handleSubmit = (e:any) => {
     //Todo fehlerhaften Input abfangen!
+    //console.log(`ID aus quizquestion ${quizId}`)
     e.preventDefault();
-    question.question = questionContent;
+    question.quizId = quizId;
+    question.question_content = questionContent;
     question.correct_answer = correctAnswer;
     question.category = category;
     question.hint = hint;
 
     answers.split(" ").forEach((answer) => {
-      question.possibleAnswers.push(answer);
+      question.possible_answers.push(answer);
     });
 
     console.log(question)

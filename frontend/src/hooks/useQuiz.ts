@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { IQuizquestion } from '../typings/Quizquestion';
 
 export const useQuiz = () => {
+
+  const [quizId, setQuizId] = useState('');
+  
   
     async function postQuizQuestion(question:IQuizquestion){
         try {
+
+            console.log(question)
             const URL = "http://localhost:4000/quiz/add";
         
             const response = await fetch(URL, {
@@ -19,11 +24,39 @@ export const useQuiz = () => {
               throw new Error(response.statusText);
             }
         
-            console.log("posted todo");
+            console.log("posted question");
           } catch (error) {
             console.log(error);
           }
         
+    }
+
+
+    async function addNewQuiz():Promise<string>{
+
+      try {
+        const URL = "http://localhost:4000/quiz/add/newquiz";
+    
+        const response = await fetch(URL, {
+          method: "GET",
+          headers: { "Content-type": "application/json" }
+        });
+    
+        if (!response.ok) {
+          console.log("error post todo frontend");
+          throw new Error(response.statusText);
+        }
+    
+    
+        const id = await response.json()
+        console.log(id.newQuizId)
+        setQuizId(id.newQuizId);
+        console.log(quizId)
+        
+      } catch (error) {
+        console.log(error);
+      }
+      return ''
     }
   
   
@@ -31,7 +64,9 @@ export const useQuiz = () => {
   
   
     return {
-        postQuizQuestion
+        postQuizQuestion,
+        addNewQuiz,
+        quizId
     }
     
   
