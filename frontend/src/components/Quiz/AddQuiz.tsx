@@ -4,6 +4,7 @@ import { useQuiz } from '../../hooks/useQuiz'
 import { Quizquestion } from '../Quizquestion/Quizquestion';
 
 import css from "./AddQuizStyle.module.css";
+import { AllQuizCategories } from './AllQuizCategories';
 
 export const AddQuiz = () => {
 
@@ -31,6 +32,9 @@ export const AddQuiz = () => {
           <Quizquestion quizId={quizId}></Quizquestion>
         )}
       </div>
+
+
+      <AllQuizCategories></AllQuizCategories>
        
        
     </div>

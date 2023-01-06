@@ -1,7 +1,7 @@
 import Question from "../../models/quiz/question.js";
 import { PubSub } from "graphql-subscriptions";
 import User from "../../models/user/user.model.js";
-const NEW_QUESTION = "NEW_QUESTION";
+const NEW_QUESTION_CATEGORY = "NEW_QUESTION_CATEGORY";
 const pubsub = new PubSub();
 
 export const resolvers = {
@@ -31,16 +31,16 @@ export const resolvers = {
         hint: args.hint,
       });
       await newQuestion.save();
-      pubsub.publish(NEW_QUESTION, {
-        newQuestion: "newQuestion"
+      pubsub.publish(NEW_QUESTION_CATEGORY, {
+        newQuestionCategory: newQuestion.category
       })
       return newQuestion;
     },
   },
 
   Subscription: {
-    newQuestion: {
-      subscribe: () => pubsub.asyncIterator([NEW_QUESTION]),
+    newQuestionCategory: {
+      subscribe: () => pubsub.asyncIterator([NEW_QUESTION_CATEGORY]),
     },
   },
 };

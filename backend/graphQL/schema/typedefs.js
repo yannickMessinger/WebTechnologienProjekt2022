@@ -24,7 +24,7 @@ export const typeDefs = gql`
         ) : Question
     }
     type Subscription {
-        newQuestion: String
+        newQuestionCategory: String
     }
 `
 
