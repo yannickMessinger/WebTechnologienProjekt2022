@@ -8,6 +8,7 @@ export const resolvers = {
   Query: {
     quizCategory: async (root, args) => {
       const questions = await Question.find({ category: args.category }).exec();
+      console.log(questions)
       return questions;
     },
     categories: async () => {
@@ -24,9 +25,10 @@ export const resolvers = {
   Mutation: {
     createQuestion: async (root, args) => {
       const newQuestion = new Question({
-        question: args.question,
-        possibleAnswers: args.possibleAnswers,
-        correctAnswer: args.correctAnswer,
+        quizId:args.quizId,
+        question_content: args.question_content,
+        possible_answers: args.possible_answers,
+        correct_answer: args.correct_answer,
         category: args.category,
         hint: args.hint,
       });

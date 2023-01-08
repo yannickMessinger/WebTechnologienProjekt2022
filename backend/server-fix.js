@@ -31,26 +31,22 @@ const startServer = async () => {
 
    quizRoutes.route('/add').post((req, res) => {
         let question = new Question(req.body);
+        console.log(question)
         Quiz.findById(question.quizId, (err, Quiz) => {
           Quiz.quiz_questions.push(question)
-          Quiz.save().then(() => {
-            console.log("Quizfrage zu quiz geaddet un gespeichert")
+          Quiz.save()
+          .then(() => {
+            res.status(200)
           })
           console.log(Quiz.quiz_questions)
+        }).catch(err => {
+          res.status(400)
         })
       
       
         resolvers.Mutation.createQuestion(null, question);
-        //console.log("question:", question);
-        //console.log(question.quizId)
+      
         
-        question.save()
-            .then(question => {
-                res.status(200).json({'question': 'question added successfully'});
-            })
-            .catch(err => {
-                res.status(400).send('adding new question failed');
-            });
     });
 
     quizRoutes.route('/add/newquiz').get((req, res) => {

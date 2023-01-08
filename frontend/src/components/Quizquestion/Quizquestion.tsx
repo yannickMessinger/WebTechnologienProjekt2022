@@ -26,8 +26,7 @@ export const Quizquestion = ({quizId} : Questionprops) => {
 
 
   const handleSubmit = (e:any) => {
-    //Todo fehlerhaften Input abfangen!
-    //console.log(`ID aus quizquestion ${quizId}`)
+    
     e.preventDefault();
     question.quizId = quizId;
     question.question_content = questionContent;
