@@ -1,34 +1,38 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import logo from "./logo.svg";
-import "./App.css";
-import { Chat } from "./components/Chat/Chat";
-import { Quizquestion } from './components/Quizquestion/Quizquestion';
-import { AddQuiz } from "./components/Quiz/AddQuiz";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { QuizCategorySelection } from "./components/Quiz/QuizGame/QuizCategorySelection";
+import { Chat } from "./components/Chat/Chat";
+import { AddQuiz } from "./components/Quiz/AddQuiz";
+import { AllQuizCategories } from "./components/Quiz/AllQuizCategories";
+import { Layout } from "./pages/Layout";
+import { Home } from "./pages/Home";
+import { Quiz } from "./pages/Quiz";
+import { Login } from "./pages/Login";
+import { NoPage } from "./pages/NoPage";
+import { CreateQuestion } from "./pages/CreateQuestion";
 
 const client = new ApolloClient({
-  uri:'http://localhost:4000/graphql',
+  uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
 });
-
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <div className="App">
-          <h3>ÄPP</h3>
-          <Chat></Chat>
-          <AddQuiz></AddQuiz>
-          <Link to="/quiz/select">Kategorieauswahl</Link>
-          {/* <Link to="/quiz">Quiz</Link> */}
+          <h1>QUIZ-ÄPP</h1>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="quiz" element={<Quiz />} />
+              <Route path="createQuestion" element={<CreateQuestion />} />
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+          <Chat />
         </div>
-        <Routes>
-          <Route path="/quiz/select" element={<QuizCategorySelection />} />
-          {/* <Route path="/quiz" element={<Quiz />} /> */}
-        </Routes>
       </Router>
     </ApolloProvider>
   );

@@ -8,7 +8,6 @@ import {
 
 export const AllQuizCategories = () => {
   const { data, loading, error } = useQuery(GET_AVAILABLE_QUIZ_CATEGORIES);
-  //const {data,loading,error} = useQuery()
   const [chooseCategory, setChooseCategory] = useState("");
   const categories = data?.categories;
 
@@ -33,7 +32,7 @@ export const AllQuizCategories = () => {
             name="category"
             onChange={(e: any) => {
               setChooseCategory(e.target.value);
-              console.log("chhose");
+              console.log("choose");
             }}
           >
             {categories.map((category: any) => (

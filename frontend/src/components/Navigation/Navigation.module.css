@@ -1,0 +1,28 @@
+.navigation {
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.navigation ul {
+    padding: 1rem;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.navigation li.active {
+    background-color: #555;
+    color:aliceblue;
+}
+
+.navigation li:hover {
+    color: white;
+}
