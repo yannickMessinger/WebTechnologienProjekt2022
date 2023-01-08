@@ -3,11 +3,12 @@ import {gql} from "apollo-server-express";
 export const typeDefs = gql`
     type Question {
         _id: String,
-        question: String,
-        possibleAnswers: [String],
-        correctAnswer: String,
+        quizId:String,
+        question_content: String,
+        possible_answers: [String],
+        correct_answer: String,
         category: String,
-        hint: [String],
+        hint: String,
     }
     type Query {
         quizCategory (category: String): [Question]
@@ -24,7 +25,7 @@ export const typeDefs = gql`
         ) : Question
     }
     type Subscription {
-        newQuestion: String
+        newQuestionCategory: String
     }
 `
 

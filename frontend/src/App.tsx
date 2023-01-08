@@ -3,14 +3,16 @@ import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import { Chat } from "./components/Chat/Chat";
-import { Quiz } from "./components/Quiz/Quiz";
+import { Quizquestion } from './components/Quizquestion/Quizquestion';
+import { AddQuiz } from "./components/Quiz/AddQuiz";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { QuizCategorySelection } from "./components/Quiz/QuizGame/QuizCategorySelection";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri:'http://localhost:4000/graphql',
   cache: new InMemoryCache(),
 });
+
 
 function App() {
   return (
@@ -19,7 +21,7 @@ function App() {
         <div className="App">
           <h3>ÄPP</h3>
           <Chat></Chat>
-          <Quiz></Quiz>
+          <AddQuiz></AddQuiz>
           <Link to="/quiz/select">Kategorieauswahl</Link>
           {/* <Link to="/quiz">Quiz</Link> */}
         </div>

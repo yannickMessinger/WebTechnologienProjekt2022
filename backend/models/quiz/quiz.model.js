@@ -13,6 +13,9 @@ const Quiz = new Schema({
             question_id: {
                 type: String
             },
+            quizId:{
+                type:String
+            },
             question_content: {
                 type: String
             },
@@ -22,8 +25,11 @@ const Quiz = new Schema({
             correct_answer: {
                 type: String
             },
-            hints: {
-                type: [String]
+            category:{
+                type:String
+            },
+            hint: {
+                type: String
             }
         }]
     },

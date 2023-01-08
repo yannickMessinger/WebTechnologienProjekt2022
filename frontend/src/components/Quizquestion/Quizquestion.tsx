@@ -3,17 +3,21 @@ import { useQuiz } from "../../hooks/useQuiz";
 import { IQuizquestion } from "../../typings/Quizquestion";
 import css from "./Quizstyle.module.css";
 
+interface Questionprops {
+  quizId: string
+}
 
 
-export const Quiz = () => {
+export const Quizquestion = ({quizId} : Questionprops) => {
   const question: IQuizquestion = {
-    question: "",
-    possibleAnswers: [],
+    quizId: "",
+    question_content: "",
+    possible_answers: [],
     correct_answer: "",
     category: "",
     hint: "",
   };
-  const { postQuizQuestion } = useQuiz();
+  const { postQuizQuestion} = useQuiz();
   const [questionContent, setQuestionContent] = useState("");
   const [answers, setAnswers] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -22,14 +26,16 @@ export const Quiz = () => {
 
 
   const handleSubmit = (e:any) => {
+    
     e.preventDefault();
-    question.question = questionContent;
+    question.quizId = quizId;
+    question.question_content = questionContent;
     question.correct_answer = correctAnswer;
     question.category = category;
     question.hint = hint;
 
     answers.split(" ").forEach((answer) => {
-      question.possibleAnswers.push(answer);
+      question.possible_answers.push(answer);
     });
 
     console.log(question)
@@ -41,70 +47,82 @@ export const Quiz = () => {
     setCorrectAnswer("");
     setCategory("");
     setCategory("");
+    setHint("");
   };
 
   return (
     <>
-      <div className={css.wrapper}>
-        <form onSubmit={handleSubmit}>
+      
+        <div className={css.questionWindow}>
+          <div className={css.enter_question}>
           <label>
             Enter your question:
+            </label>
             <input
               type="text"
               value={questionContent}
               onChange={(e) => setQuestionContent(e.target.value)}
             />
-          </label>
+          
+          </div>
 
-          <br></br>
-
+          <div className={css.possible_answers}>
           <label>
             Enter possible answers seperated by whitepace:
+            </label>
             <input
               type="text"
               value={answers}
               onChange={(e) => setAnswers(e.target.value)}
             />
-          </label>
+          
+          </div>
 
-          <br></br>
-
+         
+          <div className={css.correct_answer}>
           <label>
             Enter correct answer:
+            </label>
             <input
               type="text"
               value={correctAnswer}
               onChange={(e) => setCorrectAnswer(e.target.value)}
             />
-          </label>
+          
+          </div>
 
-          <br></br>
-
+         
+         <div className={css.category}>
           <label>
             Enter category:
+            </label>
             <input
               type="text"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             />
-          </label>
+         
+          </div>
 
-          <br></br>
-
+         
+          <div className={css.hint}>
           <label>
             Enter hint:
+            </label>
             <input
               type="text"
               value={hint}
               onChange={(e) => setHint(e.target.value)}
             />
-          </label>
+         
+          </div>
 
-          <br></br>
-
-          <input type="submit" />
-        </form>
-      </div>
+          
+          <div className={css.send_button}>
+          <button className={css.sendbutton} onClick={(e) => {handleSubmit(e)}}>SENDEN</button>
+          </div>
+        </div>
+      
     </>
   );
 };

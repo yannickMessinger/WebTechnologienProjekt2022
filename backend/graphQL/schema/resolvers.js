@@ -1,13 +1,14 @@
 import Question from "../../models/quiz/question.js";
 import { PubSub } from "graphql-subscriptions";
 import User from "../../models/user/user.model.js";
-const NEW_QUESTION = "NEW_QUESTION";
+const NEW_QUESTION_CATEGORY = "NEW_QUESTION_CATEGORY";
 const pubsub = new PubSub();
 
 export const resolvers = {
   Query: {
     quizCategory: async (root, args) => {
       const questions = await Question.find({ category: args.category }).exec();
+      console.log(questions)
       return questions;
     },
     categories: async () => {
@@ -24,23 +25,24 @@ export const resolvers = {
   Mutation: {
     createQuestion: async (root, args) => {
       const newQuestion = new Question({
-        question: args.question,
-        possibleAnswers: args.possibleAnswers,
-        correctAnswer: args.correctAnswer,
+        quizId:args.quizId,
+        question_content: args.question_content,
+        possible_answers: args.possible_answers,
+        correct_answer: args.correct_answer,
         category: args.category,
         hint: args.hint,
       });
       await newQuestion.save();
-      pubsub.publish(NEW_QUESTION, {
-        newQuestion: "newQuestion"
+      pubsub.publish(NEW_QUESTION_CATEGORY, {
+        newQuestionCategory: newQuestion.category
       })
       return newQuestion;
     },
   },
 
   Subscription: {
-    newQuestion: {
-      subscribe: () => pubsub.asyncIterator([NEW_QUESTION]),
+    newQuestionCategory: {
+      subscribe: () => pubsub.asyncIterator([NEW_QUESTION_CATEGORY]),
     },
   },
 };
