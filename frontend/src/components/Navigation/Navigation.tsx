@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import css from "./Navigation.module.css";
 
@@ -6,10 +6,10 @@ export const NavBar = () => {
   return (
     <nav className={css.navigation}>
       <ul>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/quiz">Quiz</NavLink>
-        <NavLink to="/createQuestion">create new question</NavLink>
-        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/" name="Home" />
+        <NavLink to="/quiz" name="Quiz" />
+        <NavLink to="/createQuestion" name="neue Frage erstell" />
+        <NavLink to="/login" name="Login" />
       </ul>
     </nav>
   );
@@ -17,17 +17,17 @@ export const NavBar = () => {
 
 interface NavLinkProps {
   to: string;
-  children: ReactNode;
+  name: string;
 }
 
-const NavLink = ({ to, children, ...props }: NavLinkProps) => {
+const NavLink = ({ to, name, ...props }: NavLinkProps) => {
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
     <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
-        {children}
+      <Link className={css.link} to={to} {...props}>
+        <button className={css.button}>{name}</button>
       </Link>
     </li>
   );

@@ -1,7 +1,7 @@
 .navigation {
     margin: 0;
     box-sizing: border-box;
-    background-color: #333;
+    background-color:darkslategrey;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -18,11 +18,31 @@
     gap: 1rem;
 }
 
-.navigation li.active {
-    background-color: #555;
-    color:aliceblue;
+.button {
+    display:inline-block;
+    padding:0.5em 3em;
+    border:0.16em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-family:'Roboto',sans-serif;
+    font-weight:400;
+    color:#333;
+    text-align:center;
+    transition: all 0.15s;
 }
 
-.navigation li:hover {
-    color: white;
+.button:hover {
+    color:#000;
+    background-color:cornflowerblue;
+}
+
+.button:active {
+    border-color: darkblue;
+}
+
+.link {
+    text-decoration: none;
+    color: #000;
 }

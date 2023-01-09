@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Chat } from "./components/Chat/Chat";
-import { AddQuiz } from "./components/Quiz/AddQuiz";
-import { AllQuizCategories } from "./components/Quiz/AllQuizCategories";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Quiz } from "./pages/Quiz";

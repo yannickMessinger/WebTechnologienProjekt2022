@@ -56,5 +56,7 @@ export const useQuiz = () => {
     postQuizQuestion,
     addNewQuiz,
     quizId,
+    quizQuestions,
+    setQuizQuestions
   };
 };

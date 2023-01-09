@@ -1,0 +1,19 @@
+.question {
+    text-align: center;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.li_items {
+    padding: 10px;
+    text-align: center;
+}
+
+.li_items:hover {
+    background-color: teal;
+}

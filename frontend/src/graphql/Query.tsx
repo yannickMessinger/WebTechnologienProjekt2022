@@ -18,12 +18,6 @@ export const GET_ALL_QUESTIONS_TO_CATEGORY = gql`
   }
 `;
 
-export const GET_CATEGORIES = gql`
-  query categories {
-    categories
-  }
-`;
-
 export const GET_QUIZ_BY_CATEGORY = gql`
   query quizCategory($category: String) {
     quizCategory(category: $category) {
