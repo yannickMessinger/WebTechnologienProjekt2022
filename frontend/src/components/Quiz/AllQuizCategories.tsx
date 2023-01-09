@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-import { useQuery } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import {
   GET_AVAILABLE_QUIZ_CATEGORIES,
   GET_ALL_QUESTIONS_TO_CATEGORY,
 } from "../../graphql/Query";
 
+import {NEW_CATEGORY_ADDED} from "../../graphql/Subscription"
+
 export const AllQuizCategories = () => {
   const { data, loading, error } = useQuery(GET_AVAILABLE_QUIZ_CATEGORIES);
+  
+  const update = useSubscription(NEW_CATEGORY_ADDED,{
+   
+  }).data.newQuestionCategory
+
   const [chooseCategory, setChooseCategory] = useState("");
   const categories = data?.categories;
+  console.log(update)
 
   console.log(chooseCategory);
 
@@ -17,6 +25,7 @@ export const AllQuizCategories = () => {
     variables: { category: chooseCategory },
     onCompleted: (data) => {
       console.log("data", data);
+      console.log(update)
     },
   });
 

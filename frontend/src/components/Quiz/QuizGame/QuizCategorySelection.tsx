@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import { useQuery } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import {
   GET_ALL_QUESTIONS_TO_CATEGORY,
   GET_AVAILABLE_QUIZ_CATEGORIES,
 } from "../../../graphql/Query";
 import css from "./QuizCategorySelection.module.css";
 import { IQuizquestion } from "../../../typings/Quizquestion";
+import { CategoryNotification } from "./CategoryNotification";
+
 
 interface Props {
   displayQuestions: (questions: IQuizquestion[]) => void;
@@ -19,6 +21,11 @@ interface OptionProps {
 }
 
 export const QuizCategorySelection = (props: Props) => {
+  
+  
+
+   
+  
   const { data } = useQuery(GET_AVAILABLE_QUIZ_CATEGORIES);
   const [selected, setSelected] = useState("");
 
