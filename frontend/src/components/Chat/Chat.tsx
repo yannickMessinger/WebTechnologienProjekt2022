@@ -24,11 +24,12 @@ export const Chat = () => {
   return (
     <div className={css.chatWindowOuterWrapper}>
       <button
+        className="css.button"
         onClick={() => {
           toggleDisp();
         }}
       >
-        {showChat ? '\u25B2' : '\u25BC'}
+        {showChat ? "\u25B2" : "\u25BC"}
       </button>
       {showChat && (
         <div className={css.chatWindowWrapper}>
@@ -46,6 +47,7 @@ export const Chat = () => {
                   }}
                 ></input>
                 <button
+                  className="css.button"
                   onClick={() => {
                     setshowSetUserButton(!showSetUserButton);
                   }}
@@ -70,6 +72,7 @@ export const Chat = () => {
                 }}
               ></input>
               <button
+                className="css.button"
                 onClick={() => {
                   sendMessage();
                 }}
