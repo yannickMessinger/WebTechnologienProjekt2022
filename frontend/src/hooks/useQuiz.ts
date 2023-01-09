@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { IQuizquestion } from "../typings/Quizquestion";
 
 export const useQuiz = () => {
+  const [score, setScore] = useState(0);
   const [quizId, setQuizId] = useState("");
   const [quizQuestions, setQuizQuestions] = useState<IQuizquestion[]>([]);
 
@@ -57,6 +58,8 @@ export const useQuiz = () => {
     addNewQuiz,
     quizId,
     quizQuestions,
-    setQuizQuestions
+    setQuizQuestions,
+    score,
+    setScore
   };
 };
