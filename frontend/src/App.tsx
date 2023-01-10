@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache,HttpLink,split } from "@apollo/client";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { WebSocketLink } from "@apollo/link-ws";
 import { Chat } from "./components/Chat/Chat";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
@@ -9,8 +11,36 @@ import { Login } from "./pages/Login";
 import { NoPage } from "./pages/NoPage";
 import { CreateQuestion } from "./pages/CreateQuestion";
 
+const httpLink = new HttpLink({
+  uri: "http://localhost:4000/graphql", // Or your Slash GraphQL endpoint (if you're using Slash GraphQL)
+});
+
+const wsLink = 
+   new WebSocketLink({
+      uri: "ws://localhost:5000/graphql", // Can test with your Slash GraphQL endpoint (if you're using Slash GraphQL) 
+      options: {
+        reconnect: true,
+      },
+    });
+
+const splitLink = 
+  split(
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        return (
+          definition.kind === "OperationDefinition" &&
+          definition.operation === "subscription"
+        );
+      },
+      wsLink,
+      httpLink
+    );
+ 
+
+
+
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  link: splitLink,
   cache: new InMemoryCache(),
 });
 

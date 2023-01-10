@@ -56,6 +56,7 @@ export const QuizCategorySelection = (props: Props) => {
 
   return (
     <>
+      <CategoryNotification/>
       <label htmlFor="category">Wähle eine Kategorie</label>
       <Select options={categories} onChange={handleSelect} />
       <button className={css.button} onClick={e => handleClick(e)}>OK</button>

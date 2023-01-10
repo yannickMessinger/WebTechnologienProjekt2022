@@ -27,6 +27,8 @@ const startServer = async () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   const httpServer = http.createServer(app);
+  const subscriptionHttpServer = http.createServer(app);
+
   const schema = makeExecutableSchema({ typeDefs, resolvers });
 
    quizRoutes.route('/add').post((req, res) => {
@@ -67,7 +69,7 @@ const startServer = async () => {
   
 
   const wsServer = new WebSocketServer({
-    server: httpServer,
+    server: subscriptionHttpServer,
     path: "/graphql",
   });
 
@@ -111,8 +113,15 @@ const startServer = async () => {
     console.log(`Server is now running on http://localhost:${PORT}/graphql`);
   });
 
+  subscriptionHttpServer.listen(5000, () => {
+    console.log(`Server is now running on http://localhost:5000/graphql`);
+  });
+
+  
+
   //Socket io stuff
 
+  
   const io = new Server(httpServer, {
     cors: {
       origin: "*",
@@ -131,16 +140,19 @@ const startServer = async () => {
       });
     });
 
-    /*
+      /*
       socket.on("chat_message_frontend", (message) => {
           //To all connected clients except the sender
          socket.broadcast.emit("chat_message_backend", {payload: message.payload})
-      });*/
+      });
+      */
 
     socket.on("disconnect", () => {
       console.log("User disconnected :(");
     });
   });
+  
+  
 };
 
 startServer();
