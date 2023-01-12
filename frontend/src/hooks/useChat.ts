@@ -29,6 +29,10 @@ export const useChat = () => {
     console.log(`connected to backend with id: ${socket.id}`);
   });
 
+  socket.on("update_category_backend", (message) => {
+    console.log(`new category from backend: ${message.category}`);
+  });
+
   socket.on("chat_message_backend", (message) => {
     console.log(
       `Message an alle: Username${message.username} Msg: ${message.payload}`
@@ -47,7 +51,16 @@ export const useChat = () => {
     });
   }
 
+
+  function sendCategoryUpdate(category:string){
+    socket.emit("update_category_frontend", {
+      category:category
+    });
+  }
+
   return {
+    socket,
+    sendCategoryUpdate,
     sendChatMsg,
     msglist,
   };

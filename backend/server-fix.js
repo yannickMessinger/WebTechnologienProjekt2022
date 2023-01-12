@@ -131,11 +131,13 @@ const startServer = async () => {
       });
     });
 
-    /*
-      socket.on("chat_message_frontend", (message) => {
-          //To all connected clients except the sender
-         socket.broadcast.emit("chat_message_backend", {payload: message.payload})
-      });*/
+    socket.on("update_category_frontend", (message) => {
+     io.emit("update_category_backend", {
+        category:message.category
+      });
+    });
+
+   
 
     socket.on("disconnect", () => {
       console.log("User disconnected :(");

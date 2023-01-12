@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
 import { IQuizquestion } from "../typings/Quizquestion";
+import { useChat } from "./useChat";
 
 export const useQuiz = () => {
+  const {sendCategoryUpdate} = useChat();
   const [score, setScore] = useState(0);
   const [quizId, setQuizId] = useState("");
   const [quizQuestions, setQuizQuestions] = useState<IQuizquestion[]>([]);
 
   async function postQuizQuestion(question: IQuizquestion) {
     try {
+      sendCategoryUpdate(question.category);
+      
       console.log(question);
       const URL = "http://localhost:4000/quiz/add";
 
