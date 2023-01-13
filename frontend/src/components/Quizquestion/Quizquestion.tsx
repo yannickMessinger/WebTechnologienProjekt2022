@@ -56,7 +56,7 @@ export const Quizquestion = ({quizId} : Questionprops) => {
         <div className={css.questionWindow}>
           <div className={css.enter_question}>
           <label>
-            Enter your question:
+            Frage eingeben:
             </label>
             <input
               type="text"
@@ -68,7 +68,7 @@ export const Quizquestion = ({quizId} : Questionprops) => {
 
           <div className={css.possible_answers}>
           <label>
-            Enter possible answers seperated by whitepace:
+           vier Antwortmöglichkeiten, durch Leerzeichen getrennt
             </label>
             <input
               type="text"
@@ -81,7 +81,7 @@ export const Quizquestion = ({quizId} : Questionprops) => {
          
           <div className={css.correct_answer}>
           <label>
-            Enter correct answer:
+            korrekte Antwort:
             </label>
             <input
               type="text"
@@ -94,7 +94,7 @@ export const Quizquestion = ({quizId} : Questionprops) => {
          
          <div className={css.category}>
           <label>
-            Enter category:
+            Kategorie:
             </label>
             <input
               type="text"
@@ -107,7 +107,7 @@ export const Quizquestion = ({quizId} : Questionprops) => {
          
           <div className={css.hint}>
           <label>
-            Enter hint:
+            Tipp:
             </label>
             <input
               type="text"

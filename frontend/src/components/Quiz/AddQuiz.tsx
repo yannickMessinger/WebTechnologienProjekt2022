@@ -25,7 +25,7 @@ export const AddQuiz = () => {
   return (
     <div className={css.addQuizOuterWrapper}>
       <div className={css.addQuizInnerWrapper}>
-      <button onClick={() => {createNewQuiz()}}>{showQuestionForm ?'done' : '+'}</button>
+      <button onClick={() => {createNewQuiz()}}>{showQuestionForm ?'fertig' : '+'}</button>
         {showQuestionForm &&  (
           <Quizquestion quizId={quizId}></Quizquestion>
         )}
