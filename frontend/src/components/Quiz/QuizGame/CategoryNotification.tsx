@@ -2,26 +2,23 @@ import { useSubscription } from "@apollo/client";
 import React from "react";
 import { NEW_CATEGORY_ADDED } from "../../../graphql/Subscription";
 
-export const CategoryNotification = () => {
-  const { data, loading, error } = useSubscription(NEW_CATEGORY_ADDED, {
-    onData:(options => {
-      console.log("hier muddi schau");
-      console.log(options.data);
-      
-    })
-  });
+interface Props {
+  newCategory:string
+  
+}
+
+export const CategoryNotification = ({newCategory}:Props) => {
+  
   
 
  
   return (
     <div>
-      {loading ? (
-        <div>listening</div>
-      ) : (
-        <div>
-          <p>data received</p>
-        </div>
-      )}
+      
+        
+          <p>Kategorie der zuletzt hinzugefügten Frage: "{newCategory}"</p>
+        
+      
     </div>
   );
 };

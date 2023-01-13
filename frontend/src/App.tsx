@@ -10,18 +10,19 @@ import { Quiz } from "./pages/Quiz";
 import { Login } from "./pages/Login";
 import { NoPage } from "./pages/NoPage";
 import { CreateQuestion } from "./pages/CreateQuestion";
+import {GraphQLWsLink} from "@apollo/client/link/subscriptions"
+import {createClient} from "graphql-ws";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql", // Or your Slash GraphQL endpoint (if you're using Slash GraphQL)
 });
 
 const wsLink = 
-   new WebSocketLink({
-      uri: "ws://localhost:5000/graphql", // Can test with your Slash GraphQL endpoint (if you're using Slash GraphQL) 
-      options: {
-        reconnect: true,
-      },
-    });
+   new GraphQLWsLink(
+     createClient({
+      url:"ws://localhost:5000/graphql"
+     })
+    );
 
 const splitLink = 
   split(
