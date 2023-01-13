@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import { Chat } from "../Chat/Chat";
 import css from "./Navigation.module.css";
 
 export const NavBar = () => {
@@ -7,8 +8,8 @@ export const NavBar = () => {
     <nav className={css.navigation}>
       <ul>
         <NavLink to="/" name="Home" />
-        <NavLink to="/quiz" name="Quiz" />
-        <NavLink to="/createQuestion" name="neue Frage erstell" />
+        <NavLink to="/quiz" name="Quiz spielen" />
+        <NavLink to="/createQuestion" name="neue Frage erstellen" />
         <NavLink to="/login" name="Login" />
       </ul>
     </nav>

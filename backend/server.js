@@ -53,7 +53,6 @@ const startServer = async () => {
 
     quizRoutes.route('/add/newquiz').get((req, res) => {
       let quiz = new Quiz();
-      //console.log(quiz._id)
      
       quiz.save()
           .then(quiz => {
@@ -120,8 +119,6 @@ const startServer = async () => {
   
 
   //Socket io stuff
-
-  
   const io = new Server(httpServer, {
     cors: {
       origin: "*",
@@ -132,7 +129,7 @@ const startServer = async () => {
     console.log(`User connected with SocketID: ${socket.id}`);
 
     socket.on("chat_message_frontend", (message) => {
-      //to all connected clients
+    
 
       io.emit("chat_message_backend", {
         username: message.username,
@@ -140,13 +137,7 @@ const startServer = async () => {
       });
     });
 
-      /*
-      socket.on("chat_message_frontend", (message) => {
-          //To all connected clients except the sender
-         socket.broadcast.emit("chat_message_backend", {payload: message.payload})
-      });
-      */
-
+    
     socket.on("disconnect", () => {
       console.log("User disconnected :(");
     });

@@ -12,6 +12,7 @@ import { NoPage } from "./pages/NoPage";
 import { CreateQuestion } from "./pages/CreateQuestion";
 import {GraphQLWsLink} from "@apollo/client/link/subscriptions"
 import {createClient} from "graphql-ws";
+import logo from "../src/assets/hochschule-rheinmain-bildmarke.jpg"
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql", // Or your Slash GraphQL endpoint (if you're using Slash GraphQL)
@@ -50,7 +51,8 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div className="App">
-          <h1>QUIZ-ÄPP</h1>
+          <h1>QUIZ-MI</h1>
+          <img src ={logo} width="auto" height="80"/>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />

@@ -22,6 +22,8 @@ export const Chat = () => {
   };
 
   return (
+    <div>
+    <h4>Chatte mit anderen Spielern:</h4>
     <div className={css.chatWindowOuterWrapper}>
       <button
         className="css.button"
@@ -47,7 +49,7 @@ export const Chat = () => {
                   }}
                 ></input>
                 <button
-                  className="css.button"
+                  className={css.chatbutton}
                   onClick={() => {
                     setshowSetUserButton(!showSetUserButton);
                   }}
@@ -72,7 +74,7 @@ export const Chat = () => {
                 }}
               ></input>
               <button
-                className="css.button"
+                className={css.chatbutton}
                 onClick={() => {
                   sendMessage();
                 }}
@@ -84,11 +86,12 @@ export const Chat = () => {
             </div>
           ) : (
             <div className={css.footer}>
-              <p>Bitte Username eingebe!!</p>
+              <p><b>Bitte Username eingeben!</b></p>
             </div>
           )}
         </div>
       )}
+    </div>
     </div>
   );
 };

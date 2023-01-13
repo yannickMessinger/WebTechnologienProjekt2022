@@ -1,9 +1,8 @@
 .chatWindowOuterWrapper{
-    background-color: darkgray;
+    background-color: darkslategrey;
     max-width: 300px;
     max-height:600px;
     padding: 2%;
-    margin: 100px;
 }
 
 
@@ -62,8 +61,10 @@ input{
     width: 50%;
 }
 
-.button{
-    width:53%
+.chatbutton{
+    width:52%;
+    margin-left: 25%;
+    
 }
 
 .showChatAndFooter{
