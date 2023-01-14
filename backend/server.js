@@ -16,6 +16,9 @@ import { typeDefs } from "./graphQL/schema/typedefs.js";
 import { Server } from "socket.io";
 import Question from "./models/quiz/question.js";
 import Quiz from "./models/quiz/quiz.model.js";
+import passport from 'passport';
+import { Strategy } from 'passport-google-oauth2';
+import session from 'express-session';
 
 
 
@@ -26,6 +29,8 @@ const startServer = async () => {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(passport.initialize());
+  app.use(session({ secret: 'das hier ist ganz geheim' }));
   const httpServer = http.createServer(app);
   const subscriptionHttpServer = http.createServer(app);
 
@@ -88,6 +93,28 @@ const startServer = async () => {
     ],
   });
 
+  const GoogleStrategy = Strategy;
+
+
+  passport.serializeUser(function (user, done) {
+    done(null, user);
+  });
+
+  passport.deserializeUser(function (user, done) {
+    done(null, user);
+  });
+
+  passport.use(new GoogleStrategy({
+    clientID: "683326814811-9j1fptf82onsarmankc8t8cagngjnddu.apps.googleusercontent.com",
+    clientSecret: "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",
+    callbackURL: "http://localhost:4000/auth/callback",
+    passReqToCallback: true
+  },
+    function (request, accessToken, refreshToken, profile, done) {
+      done(null, profile);
+    }
+  ));
+
   const serverCleanup = useServer({ schema }, wsServer);
 
   await mongoose.connect("mongodb://127.0.0.1:27017/quiz");
@@ -104,6 +131,16 @@ const startServer = async () => {
 
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
+
+  app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/auth.html')));
+
+  app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+
+  app.get('/auth/callback', passport.authenticate('google', { failureRedirect: '/' }),
+    function (req, res) {
+      res.redirect('http://localhost:3000')
+    }
+  )
 
   const PORT = 4000;
 
