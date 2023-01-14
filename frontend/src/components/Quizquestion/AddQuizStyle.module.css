@@ -3,17 +3,17 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    
+
 }
 
 .addQuizInnerWrapper {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    
+
     width: 500px;
     height: 600px;
-   
+
     margin: 5%;
     text-align: center;
     padding: 1%;

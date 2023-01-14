@@ -4,11 +4,10 @@ import { IQuizquestion } from "../../typings/Quizquestion";
 import css from "./Quizstyle.module.css";
 
 interface Questionprops {
-  quizId: string
+  quizId: string;
 }
 
-
-export const Quizquestion = ({quizId} : Questionprops) => {
+export const Quizquestion = ({ quizId }: Questionprops) => {
   const question: IQuizquestion = {
     quizId: "",
     question_content: "",
@@ -17,16 +16,14 @@ export const Quizquestion = ({quizId} : Questionprops) => {
     category: "",
     hint: "",
   };
-  const { postQuizQuestion} = useQuiz();
+  const { postQuizQuestion } = useQuiz();
   const [questionContent, setQuestionContent] = useState("");
   const [answers, setAnswers] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [category, setCategory] = useState("");
   const [hint, setHint] = useState("");
 
-
-  const handleSubmit = (e:any) => {
-    
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     question.quizId = quizId;
     question.question_content = questionContent;
@@ -38,9 +35,7 @@ export const Quizquestion = ({quizId} : Questionprops) => {
       question.possible_answers.push(answer);
     });
 
-    console.log(question)
     postQuizQuestion(question);
-
 
     setQuestionContent("");
     setAnswers("");
@@ -52,77 +47,63 @@ export const Quizquestion = ({quizId} : Questionprops) => {
 
   return (
     <>
-      
-        <div className={css.questionWindow}>
-          <div className={css.enter_question}>
-          <label>
-            Frage eingeben:
-            </label>
-            <input
-              type="text"
-              value={questionContent}
-              onChange={(e) => setQuestionContent(e.target.value)}
-            />
-          
-          </div>
-
-          <div className={css.possible_answers}>
-          <label>
-           vier Antwortmöglichkeiten, durch Leerzeichen getrennt
-            </label>
-            <input
-              type="text"
-              value={answers}
-              onChange={(e) => setAnswers(e.target.value)}
-            />
-          
-          </div>
-
-         
-          <div className={css.correct_answer}>
-          <label>
-            korrekte Antwort:
-            </label>
-            <input
-              type="text"
-              value={correctAnswer}
-              onChange={(e) => setCorrectAnswer(e.target.value)}
-            />
-          
-          </div>
-
-         
-         <div className={css.category}>
-          <label>
-            Kategorie:
-            </label>
-            <input
-              type="text"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
-         
-          </div>
-
-         
-          <div className={css.hint}>
-          <label>
-            Tipp:
-            </label>
-            <input
-              type="text"
-              value={hint}
-              onChange={(e) => setHint(e.target.value)}
-            />
-         
-          </div>
-
-          
-          <div className={css.send_button}>
-          <button className={css.sendbutton} onClick={(e) => {handleSubmit(e)}}>SENDEN</button>
-          </div>
+      <div className={css.questionWindow}>
+        <div className={css.enter_question}>
+          <label>Frage eingeben:</label>
+          <input
+            type="text"
+            value={questionContent}
+            onChange={(e) => setQuestionContent(e.target.value)}
+          />
         </div>
-      
+
+        <div className={css.possible_answers}>
+          <label>vier Antwortmöglichkeiten, durch Leerzeichen getrennt</label>
+          <input
+            type="text"
+            value={answers}
+            onChange={(e) => setAnswers(e.target.value)}
+          />
+        </div>
+
+        <div className={css.correct_answer}>
+          <label>korrekte Antwort:</label>
+          <input
+            type="text"
+            value={correctAnswer}
+            onChange={(e) => setCorrectAnswer(e.target.value)}
+          />
+        </div>
+
+        <div className={css.category}>
+          <label>Kategorie:</label>
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        </div>
+
+        <div className={css.hint}>
+          <label>Tipp:</label>
+          <input
+            type="text"
+            value={hint}
+            onChange={(e) => setHint(e.target.value)}
+          />
+        </div>
+
+        <div className={css.send_button}>
+          <button
+            className={css.sendbutton}
+            onClick={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            SENDEN
+          </button>
+        </div>
+      </div>
     </>
   );
 };

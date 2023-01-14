@@ -5,4 +5,4 @@ export interface IQuizquestion {
     correct_answer: string;
     category: string;
     hint: string;
-  }
+}

@@ -11,7 +11,11 @@ export const Quiz = () => {
     <>
       <h1>Quiz</h1>
       {playing ? (
-        <QuizQuestion questions={quizQuestions} score={score} setScore={setScore}/>
+        <QuizQuestion
+          questions={quizQuestions}
+          score={score}
+          setScore={setScore}
+        />
       ) : (
         <>
           <QuizCategorySelection

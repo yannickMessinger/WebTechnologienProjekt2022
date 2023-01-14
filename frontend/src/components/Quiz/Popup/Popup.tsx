@@ -2,10 +2,10 @@ import React from "react";
 import css from "./Popup.module.css";
 
 interface PopupProps {
-    text: string;
-    closePopup: () => void;
+  text: string;
+  closePopup: () => void;
 }
-export const Popup = (props:PopupProps) => {
+export const Popup = (props: PopupProps) => {
   return (
     <div className={css.popup}>
       <div className={css.popup_inner}>

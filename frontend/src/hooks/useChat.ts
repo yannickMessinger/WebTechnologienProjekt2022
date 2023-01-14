@@ -14,16 +14,12 @@ export const useChat = () => {
   });
 
   const [msglist, setMsglist] = useState(Array<ChatMessage>);
-  
 
-  
-  
   useEffect(() => {
-    if(!socket.connected){
-    socket.connect();
+    if (!socket.connected) {
+      socket.connect();
     }
   }, []);
- 
 
   socket.on("connect", () => {
     console.log(`connected to backend with id: ${socket.id}`);
@@ -37,13 +33,12 @@ export const useChat = () => {
       ...msglist,
       { username: message.username, content: message.payload },
     ]);
-    console.log(msglist);
   });
 
   function sendChatMsg(msg: ChatMessage) {
     socket.emit("chat_message_frontend", {
       username: msg.username,
-      payload: msg.content
+      payload: msg.content,
     });
   }
 

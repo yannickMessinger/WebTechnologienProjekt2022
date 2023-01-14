@@ -16,35 +16,33 @@ export const QuizQuestion = (props: QuizQuestionProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [finished, setFinished] = useState(false);
-  console.log(props.questions);
   const questions = props.questions;
 
   const currentQuestion = () => {
     return props.questions.at(index);
-  }
+  };
 
   const closePopup = () => {
     setShowPopup(false);
-  }
+  };
 
   const checkAnswer = (answer: string) => {
-    console.log(answer);
     setShowPopup(true);
-    if(answer === currentQuestion()?.correct_answer) {
-        setMessage("Richtige Antwort! +1 Punkt erhalten!");
-        props.setScore(props.score + 1);
+    if (answer === currentQuestion()?.correct_answer) {
+      setMessage("Richtige Antwort! +1 Punkt erhalten!");
+      props.setScore(props.score + 1);
     } else {
-        setMessage("Falsche Antwort!");
+      setMessage("Falsche Antwort!");
     }
     setIndex(index + 1);
-    if(index ===  questions.length - 1) {
-        setFinished(true);
+    if (index === questions.length - 1) {
+      setFinished(true);
     }
   };
 
   const getHint = () => {
     setShowHint(true);
-  }
+  };
 
   return (
     <>
@@ -63,8 +61,13 @@ export const QuizQuestion = (props: QuizQuestionProps) => {
         })}
       </ul>
       <button onClick={() => getHint()}>Tipp</button>
-      {showPopup ? <Popup text={message} closePopup={closePopup}/> : null}
-      {showHint ? <Popup text={currentQuestion()?.hint || "kein Tipp vorhanden"} closePopup={() => setShowHint(false)} /> : null}
+      {showPopup ? <Popup text={message} closePopup={closePopup} /> : null}
+      {showHint ? (
+        <Popup
+          text={currentQuestion()?.hint || "kein Tipp vorhanden"}
+          closePopup={() => setShowHint(false)}
+        />
+      ) : null}
       {finished ? <QuizEnding score={props.score} /> : null}
     </>
   );

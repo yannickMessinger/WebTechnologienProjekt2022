@@ -12,10 +12,6 @@ import cors from 'cors';
 import typeDefs from "./graphql/schema/typedefs.js";
 import resolvers from "./graphql/schema/resolvers.js";
 
-
-//import resolvers from './resolvers';
-//import typeDefs from './typeDefs';
-
 // Create the schema, which will be used separately by ApolloServer and
 // the WebSocket server.
 const schema = makeExecutableSchema({ typeDefs, resolvers });

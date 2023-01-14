@@ -33,7 +33,6 @@ const startServer = async () => {
 
    quizRoutes.route('/add').post((req, res) => {
         let question = new Question(req.body);
-        console.log(question)
         Quiz.findById(question.quizId, (err, Quiz) => {
           Quiz.quiz_questions.push(question)
           Quiz.save()

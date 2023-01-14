@@ -8,7 +8,6 @@ export const resolvers = {
   Query: {
     quizCategory: async (root, args) => {
       const questions = await Question.find({ category: args.category }).exec();
-      console.log(questions)
       return questions;
     },
     categories: async () => {

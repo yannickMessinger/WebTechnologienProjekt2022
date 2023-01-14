@@ -7,11 +7,8 @@ import {
 } from "../../../graphql/Query";
 import css from "./QuizCategorySelection.module.css";
 import { IQuizquestion } from "../../../typings/Quizquestion";
-import { CategoryNotification } from "./CategoryNotification";
 import { NEW_CATEGORY_ADDED } from "../../../graphql/Subscription";
-import bild1 from "../../../assets/circle_notifications_FILL0_wght400_GRAD0_opsz48.png"
-import bild2 from "../../../assets/notification_important_FILL0_wght400_GRAD0_opsz48.png"
-
+import { Notification } from "./Notification";
 
 interface Props {
   displayQuestions: (questions: IQuizquestion[]) => void;
@@ -24,25 +21,18 @@ interface OptionProps {
 }
 
 export const QuizCategorySelection = (props: Props) => {
-  
-  
-
-   
-  
-  const { data,refetch } = useQuery(GET_AVAILABLE_QUIZ_CATEGORIES);
+  const { data, refetch } = useQuery(GET_AVAILABLE_QUIZ_CATEGORIES);
   const [selected, setSelected] = useState("");
 
-  const { data:newCategory, loading, error } = useSubscription(NEW_CATEGORY_ADDED, {
-    onData:(options => {
-      console.log(options.data);
+  const { data: newCategory } = useSubscription(NEW_CATEGORY_ADDED, {
+    onData: (options) => {
       refetch();
-    })
+    },
   });
 
-  /*useEffect(() =>{
-    refetch()
-  },[newCategory])
- */
+  useEffect(() => {
+    refetch();
+  }, [data]);
 
   let categories = Array<OptionProps>();
   if (data !== undefined) {
@@ -54,7 +44,6 @@ export const QuizCategorySelection = (props: Props) => {
   const allCategorys = useQuery(GET_ALL_QUESTIONS_TO_CATEGORY, {
     variables: { category: selected },
     onCompleted: (data) => {
-      //console.log("data", data);
       props.displayQuestions(data.quizCategory);
     },
   });
@@ -67,33 +56,16 @@ export const QuizCategorySelection = (props: Props) => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     props.startPlaying(true);
-  }
-
-  const Notification = () => {
-    if (newCategory !== undefined) {
-      return (
-        <>
-          <img src={bild2} />
-          <CategoryNotification newCategory={newCategory.newQuestionCategory}/>
-          <br />
-        </>
-      );
-    } else {
-      return (
-        <>
-          <img src={bild1} />
-          <br />
-        </>
-      );
-    }
   };
 
   return (
     <>
-      <Notification/>
+      <Notification newCategory={newCategory} />
       <label htmlFor="category">Wähle eine Kategorie</label>
       <Select options={categories} onChange={handleSelect} />
-      <button className={css.button} onClick={e => handleClick(e)}>OK</button>
+      <button className={css.button} onClick={(e) => handleClick(e)}>
+        OK
+      </button>
     </>
   );
 };
