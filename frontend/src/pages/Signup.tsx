@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+
+export const Signup = () => {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState('')
   async function handleSubmit(e: any) {
@@ -12,7 +13,7 @@ export const Login = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:4000/quiz/login', {
+      const res = await fetch('http://localhost:4000/quiz/signup', {
         credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -20,18 +21,17 @@ export const Login = () => {
       })
       if (res.status === 200) {
         navigate("/");
-        setErrorMsg("Erfolgreich eingeloggt! Viel Spaß c:");
       } else {
-        setErrorMsg("Nutzer oder Passwort falsch");
+        setErrorMsg("Nutzer existiert bereits");
       }
     } catch (error) {
-      console.error('An unexpected error happened occurred:', error)
+      console.error('An unexpected error happened occurred:', error);
     }
   }
 
   return (
     <>
-    <h1>Login</h1>
+    <h1>Registrieren</h1>
     <h3>{errorMsg}</h3>
       <label>
           Nutzername
@@ -41,9 +41,7 @@ export const Login = () => {
           Passwort
           <input id="passwort" type="password"></input>
       </label>
-      <button onClick={handleSubmit}>Login</button>
-      <a href="http://localhost:4000/auth/google"><button>Login mit Google</button></a>
-      <a href="http://localhost:3000/signup"><button>Registrieren</button></a>
+      <button onClick={handleSubmit}>Registrieren</button>
 </>
   );
 };

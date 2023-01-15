@@ -14,6 +14,7 @@ import { Home } from "./pages/Home";
 import { Quiz } from "./pages/Quiz";
 import { Login } from "./pages/Login";
 import { NoPage } from "./pages/NoPage";
+import { Signup } from "./pages/Signup";
 import { CreateQuestion } from "./pages/CreateQuestion";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
@@ -59,6 +60,7 @@ function App() {
               <Route path="quiz" element={<Quiz />} />
               <Route path="createQuestion" element={<CreateQuestion />} />
               <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>

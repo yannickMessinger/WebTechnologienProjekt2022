@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { useQuiz } from "../../hooks/useQuiz";
 import { Quizquestion } from "./Quizquestion";
 import css from "./AddQuizStyle.module.css";
+import { useUser } from "../../hooks/useUser";
 
 export const AddQuiz = () => {
+  //Auf Login leiten, wenn nicht autorisiert
+  useUser({redirectIfFound: false, redirectTo: '/login'});
   const { addNewQuiz, quizId } = useQuiz();
   const [showQuestionForm, setShowQuestionForm] = useState(false);
 

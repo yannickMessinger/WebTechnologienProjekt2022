@@ -1,5 +1,6 @@
 //Mongoose Schema for User Object
 import mongoose from "mongoose";
+import passportLocalMongoose from "passport-local-mongoose";
 const Schema = mongoose.Schema;
 
 let User = new Schema ({
@@ -25,5 +26,7 @@ let User = new Schema ({
         type: String
     },
 });
+
+User.plugin(passportLocalMongoose);
 
 export default mongoose.model('User', User)
