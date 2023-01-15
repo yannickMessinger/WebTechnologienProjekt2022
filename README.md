@@ -6,6 +6,7 @@
 
 ## Datenbank: 
 * ueber MongoDB Compass verbinden (bei Mac evtl. vorher im Terminal einzugeben: `mongod --config /usr/local/etc/mongod.conf`)
+* es gibt im Ordner "data_examples" zwei JSON-Dateien, die mit Datensaetzen gefuellt sind, damit man diese nicht einzeln zuerst eingeben muss, um zu spielen. Diese braucht man nur in den mongoDB Compass zu importieren.
 
 ## Backend starten: 
 * in den Ordner /backend wechseln
