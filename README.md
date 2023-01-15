@@ -15,6 +15,7 @@
 ## Frontend starten: 
 * in den Ordner /frontend wechseln
 * mit `npm start` starten
+* sollte unter localhost auf port 3000 starten.
 
 ## Login
 * zunaechst registrieren via "Registrieren", dann login via "Login"
