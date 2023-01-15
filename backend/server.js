@@ -17,8 +17,13 @@ import { Server } from "socket.io";
 import Question from "./models/quiz/question.js";
 import Quiz from "./models/quiz/quiz.model.js";
 import passport from 'passport';
+import Local from 'passport-local';
 import { Strategy } from 'passport-google-oauth2';
 import session from 'express-session';
+import { createUser, findUser, validatePassword } from './user.js';
+import userModel from "./models/user/user.model.js";
+import { getLoginSession, setLoginSession } from "./auth.js";
+import { removeTokenCookie } from "./auth-cookies.js";
 
 
 
@@ -26,15 +31,64 @@ import session from 'express-session';
 const startServer = async () => {
   const quizRoutes = express.Router();
   const app = express();
-  app.use(cors());
+  app.use(cors({origin: 'http://localhost:3000', credentials: true}));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(passport.initialize());
-  app.use(session({ secret: 'das hier ist ganz geheim' }));
+  app.use(session({ secret: 'das hier ist ganz geheim',
+    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour 
+  }));
+  app.use(passport.session());
   const httpServer = http.createServer(app);
   const subscriptionHttpServer = http.createServer(app);
 
   const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+   quizRoutes.route('/user').get(async (req, res) => {
+    try {
+      const session = await getLoginSession(req)
+      const user = (session && (await findUser(session[0]))) ?? null;
+      delete user?.password;
+      res.status(200).json({ user })
+    } catch (error) {
+      console.error(error)
+      res.status(500).end('Authentication token is invalid, please log in')
+    }
+    //if(req.user) {
+    //  res.send({user: req.user.username});
+    //} else {
+    //  res.send({error: "No User found"});
+    //}
+   });
+
+   quizRoutes.route('/signup').post((req, res) => {
+    userModel.findOne({username: { $eq: req.body.username }}, (err, c) => {
+      if(!c) {
+        createUser(req.body.username, req.body.password);
+        res.send({user: req.body.username});
+      } else {
+        res.status(400).send({error: "User existiert bereits"});
+      }
+    });
+   });
+
+   quizRoutes.route('/login').post((req, res) => {
+    userModel.findOne({username: req.body.username})
+    .clone().then(user => {
+      if(user && validatePassword(user, req.body.password)) {
+        setLoginSession(res, user.username).then(() => {
+          res.send({user: req.body.username});
+        });
+      } else {
+        res.status(400).send({error: "No User found"});
+      }
+    });
+   });
+
+   quizRoutes.route('/logout').get((req, res) => {
+      removeTokenCookie(res);
+      res.writeHead(302, { Location: '/' }).send();
+   });
 
    quizRoutes.route('/add').post((req, res) => {
         let question = new Question(req.body);
@@ -114,6 +168,18 @@ const startServer = async () => {
       done(null, profile);
     }
   ));
+
+  passport.use(userModel.createStrategy());
+    /*new LocalStrategy(
+    function(username, password, done) {
+      userModel.findOne({ username: username }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false); }
+        if (!validatePassword(password)) { return done(null, false); }
+        return done(null, user);
+      });
+    }
+  )*/
 
   const serverCleanup = useServer({ schema }, wsServer);
 
