@@ -18,15 +18,15 @@
 * sollte unter localhost auf port 3000 starten.
 
 ## Login
-* zunaechst registrieren via "Registrieren", dann login via "Login"
+* zunächst registrieren via "Registrieren", dann login via "Login"
 
 ## Quiz starten
-* aus vorhandenen Kategorien auswaehlen, falls keine verfügbar müssen zunaechst neue Fragen angelegt werden. Sie Punkt "Fragen anlegen".
-* Falls Fragen vorhanden, Kategorie waehlen und Spiel beginnen
+* aus vorhandenen Kategorien auswählen, falls keine verfügbar müssen zunächst neue Fragen angelegt werden. Siehe Punkt "Fragen anlegen".
+* Falls Fragen vorhanden, Kategorie wählen und Spiel beginnen
 
 ## Fragen anlegen
 * Button "+" legt neues Quiz im Backend an, id wird zurueck gesendet und alle Fragen, die danach ohne den "fertig" Button zu klicken abgesendet werden, werden diesem einen    Quiz zugordnet. 
-* unter "Fragen anlegen" Form ausfuellen !!richtige Antwortemoeglichkeiten per Leerzeichen getrennt, keine Input Ueberpruefung.
+* unter "Fragen anlegen" Form ausfüllen !!richtige Antwortemoeglichkeiten per Leerzeichen getrennt, keine Input Überpruefung!!.
 * Button fertig schließt Quiz und alle zuvor eingegebenen Fragen wurden diesem zugeordnet
 
 ## Chat
