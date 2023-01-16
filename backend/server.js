@@ -115,7 +115,6 @@ const startServer = async () => {
     quizRoutes.route('/add/newquiz').get(async (req, res) => {
       // Rausschmeißen, wenn nicht authentifiziert
       let session = getLoginSession(req);
-      console.log(session);
       let user = (session && (await findUser(session[0]))) ?? null;
       if(!user) {
         res.status(400).send();

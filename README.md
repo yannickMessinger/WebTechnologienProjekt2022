@@ -19,7 +19,8 @@
 * sollte unter localhost auf port 3000 starten.
 
 ## Login
-* zunächst registrieren via "Registrieren", dann login via "Login"
+* zunächst registrieren via "Registrieren", dann Login mit den angegebenen Nutzerdaten via "Login"
+* Google-Anmeldung ginge über den Knopf "Login mit Google". Weil wir http benutzen, weigert sich Google aber, unsere Anwendung als sicher anzuerkennen ._.
 
 ## Quiz starten
 * aus vorhandenen Kategorien auswählen, falls keine verfügbar müssen zunächst neue Fragen angelegt werden. Siehe Punkt "Fragen anlegen".
