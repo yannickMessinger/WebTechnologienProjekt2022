@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "63c474eb4d56e8ea6415a2d5"
+  },
+  "quizId": "63c474b94d56e8ea6415a2d2",
+  "question_content": "Wer war Obi Wan?",
+  "possible_answers": [
+    "Jedi",
+    "Putzfrau",
+    "Mechaniker",
+    "Professor"
+  ],
+  "correct_answer": "Jedi",
+  "category": "Star Wars",
+  "hint": "Lichtschwert",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c4752f4d56e8ea6415a2db"
+  },
+  "quizId": "63c474b94d56e8ea6415a2d2",
+  "question_content": "Wie gross ist R2-D2?",
+  "possible_answers": [
+    "1m",
+    "2m",
+    "3m",
+    "4m"
+  ],
+  "correct_answer": "1m",
+  "category": "Star Wars",
+  "hint": "klein",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c475664d56e8ea6415a2e2"
+  },
+  "quizId": "63c474b94d56e8ea6415a2d2",
+  "question_content": "Wie viele Filme hat Star Wars?",
+  "possible_answers": [
+    "6",
+    "8",
+    "10",
+    "12"
+  ],
+  "correct_answer": "12",
+  "category": "Star Wars",
+  "hint": "viele",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c475b54d56e8ea6415a2ea"
+  },
+  "quizId": "63c474b94d56e8ea6415a2d2",
+  "question_content": "Welchem Haus gehört Harry Potter an?",
+  "possible_answers": [
+    "Gryffindor",
+    "Ravenclaw",
+    "Slytherin",
+    "Hufflepuff"
+  ],
+  "correct_answer": "Gryffindor",
+  "category": "Harry Potter",
+  "hint": "Es ist das beliebteste Haus.",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c475fd4d56e8ea6415a2f3"
+  },
+  "quizId": "63c474b94d56e8ea6415a2d2",
+  "question_content": "Wer gewann die WM 2022?",
+  "possible_answers": [
+    "Niederlande",
+    "Frankreich",
+    "Argentinien",
+    "Marokko"
+  ],
+  "correct_answer": "Argentinien",
+  "category": "Sport",
+  "hint": "Messi stammt aus dem gesuchten Land",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c4763d4d56e8ea6415a2fd"
+  },
+  "quizId": "63c474b94d56e8ea6415a2d2",
+  "question_content": "Wo haben die Klonkriege begonnen?",
+  "possible_answers": [
+    "Tatooine",
+    "Geonosis",
+    "Naboo",
+    "Coruscan"
+  ],
+  "correct_answer": "Geonosis",
+  "category": "Star Wars",
+  "hint": "Der umliegende Asteroidenring des gesuchten Planeten ist die Folge der Zerstoerung eines benachbarten Mondes durch einen Kometen.",
+  "__v": 0
+}]
