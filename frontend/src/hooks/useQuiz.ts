@@ -11,6 +11,7 @@ export const useQuiz = () => {
     try {
       const URL = "http://localhost:4000/quiz/add";
       const response = await fetch(URL, {
+        credentials: "include",
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(question),
@@ -27,6 +28,7 @@ export const useQuiz = () => {
     try {
       const URL = "http://localhost:4000/quiz/add/newquiz";
       const response = await fetch(URL, {
+        credentials: "include",
         method: "GET",
         headers: { "Content-type": "application/json" },
       });
