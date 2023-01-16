@@ -19,7 +19,7 @@ export async function createUser( username, password ) {
 
 
 export async function findUser(username) {
-  return users.findOne({username: username}).clone()
+  return users.findOne({username: username}, {password: 0}).clone()
 }
 
 
