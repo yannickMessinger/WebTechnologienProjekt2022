@@ -17,7 +17,6 @@ import { Server } from "socket.io";
 import Question from "./models/quiz/question.js";
 import Quiz from "./models/quiz/quiz.model.js";
 import passport from 'passport';
-import Local from 'passport-local';
 import { Strategy } from 'passport-google-oauth2';
 import session from 'express-session';
 import { createUser, findUser, validatePassword } from './user.js';
@@ -47,18 +46,14 @@ const startServer = async () => {
    quizRoutes.route('/user').get(async (req, res) => {
     try {
       const session = await getLoginSession(req)
-      const user = (session && (await findUser(session[0]))) ?? null;
+      let user = (session && (await findUser(session[0]))) ?? null;
+      user = user?.toObject();
       delete user?.password;
       res.status(200).json({ user })
     } catch (error) {
       console.error(error)
       res.status(500).end('Authentication token is invalid, please log in')
     }
-    //if(req.user) {
-    //  res.send({user: req.user.username});
-    //} else {
-    //  res.send({error: "No User found"});
-    //}
    });
 
    quizRoutes.route('/signup').post((req, res) => {
@@ -90,7 +85,15 @@ const startServer = async () => {
       res.writeHead(302, { Location: '/' }).send();
    });
 
-   quizRoutes.route('/add').post((req, res) => {
+   quizRoutes.route('/add').post(async (req, res) => {
+        // Rausschmeißen, wenn nicht authentifiziert
+        let session = getLoginSession(req);
+        console.log(session);
+        let user = (session && (await findUser(session[0]))) ?? null;
+        if(!user) {
+          res.status(400).send();
+          return;
+        }
         let question = new Question(req.body);
         Quiz.findById(question.quizId, (err, Quiz) => {
           Quiz.quiz_questions.push(question)
@@ -109,7 +112,16 @@ const startServer = async () => {
         
     });
 
-    quizRoutes.route('/add/newquiz').get((req, res) => {
+    quizRoutes.route('/add/newquiz').get(async (req, res) => {
+      // Rausschmeißen, wenn nicht authentifiziert
+      let session = getLoginSession(req);
+      console.log(session);
+      let user = (session && (await findUser(session[0]))) ?? null;
+      if(!user) {
+        res.status(400).send();
+        return;
+      }
+
       let quiz = new Quiz();
      
       quiz.save()
@@ -170,16 +182,6 @@ const startServer = async () => {
   ));
 
   passport.use(userModel.createStrategy());
-    /*new LocalStrategy(
-    function(username, password, done) {
-      userModel.findOne({ username: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!validatePassword(password)) { return done(null, false); }
-        return done(null, user);
-      });
-    }
-  )*/
 
   const serverCleanup = useServer({ schema }, wsServer);
 
