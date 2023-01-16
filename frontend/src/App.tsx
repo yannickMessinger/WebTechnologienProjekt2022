@@ -19,6 +19,7 @@ import { CreateQuestion } from "./pages/CreateQuestion";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import logo from "../src/assets/hochschule-rheinmain-bildmarke.jpg";
+import { useUsername } from "./hooks/useUser";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql", // Or your Slash GraphQL endpoint (if you're using Slash GraphQL)
@@ -48,6 +49,8 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const nutzer = useUsername();
+  let chat = nutzer ? <Chat />: "";
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -64,7 +67,7 @@ function App() {
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
-          <Chat />
+          {chat}
         </div>
       </Router>
     </ApolloProvider>

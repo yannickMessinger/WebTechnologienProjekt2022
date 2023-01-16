@@ -2,8 +2,6 @@ import React from "react";
 import { useUser } from "../hooks/useUser";
 
 export const Home = () => {
-  //Auf Login leiten, wenn nicht autorisiert
-  useUser({redirectIfFound: false, redirectTo: '/login'});
   return (
     <>
       <h1>Willkommen zum QUIZ MI</h1>

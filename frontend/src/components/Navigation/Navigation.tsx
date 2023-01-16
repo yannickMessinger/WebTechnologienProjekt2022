@@ -3,13 +3,19 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useUser, useUsername } from "../../hooks/useUser";
 import { Chat } from "../Chat/Chat";
 import css from "./Navigation.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
+  const navigate = useNavigate();
   const nutzer = useUsername();
   const logout = () => {
-    fetch('http://localhost:4000/quiz/logout', {credentials: 'include'});
+    fetch('http://localhost:4000/quiz/logout', {credentials: 'include'}).then(
+      () => {
+        navigate(0);
+      }
+    );
   };
-  let nutzerInfo = nutzer ? <h3>Eingeloggter Nutzer: {nutzer.username}</h3>: "";
+  let nutzerInfo = nutzer ? <h3>Eingeloggt als: {nutzer.username}</h3>: "";
   let logButton = nutzer ? <button className={css.button} onClick={logout}>Logout</button> : <NavLink to="/login" name="Login" />
   return (
     <nav className={css.navigation}>

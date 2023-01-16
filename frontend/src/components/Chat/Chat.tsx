@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { useChat } from "../../hooks/useChat";
 import { ChatMsgList } from "./ChatMsgList";
 import css from "./Chatstyle.module.css";
+import { useUsername } from "../../hooks/useUser";
 
 export const Chat = () => {
+  const nutzer = useUsername();
   const { sendChatMsg, msglist } = useChat();
-  const [user, setUser] = useState({ username: "", chatContent: "" });
-  const [showSetUserButton, setshowSetUserButton] = useState(true);
+  const [user, setUser] = useState({ username: nutzer.username, chatContent: "" });
+  const [showSetUserButton, setshowSetUserButton] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
   const [messageContent, setMessageContent] = useState("");
   const sendMessage = () => {
-    sendChatMsg({ username: user.username, content: messageContent });
+    sendChatMsg({ username: nutzer.username, content: messageContent });
 
     setMessageContent("");
   };
@@ -36,7 +38,7 @@ export const Chat = () => {
           <div className={css.chatWindowWrapper}>
             <div className={css.header}>
               <h3>CHAT</h3>
-              <h4>Username:{user.username}</h4>
+              <h4>Username: {user.username}</h4>
 
               {showSetUserButton ? (
                 <div>

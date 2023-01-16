@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -19,13 +20,14 @@ export const Login = () => {
         body: JSON.stringify(body),
       })
       if (res.status === 200) {
-        navigate("/");
         setErrorMsg("Erfolgreich eingeloggt! Viel Spaß c:");
+        navigate('/');
+        navigate(0);
       } else {
         setErrorMsg("Nutzer oder Passwort falsch");
       }
     } catch (error) {
-      console.error('An unexpected error happened occurred:', error)
+      console.error('An unexpected error occurred:', error)
     }
   }
 
