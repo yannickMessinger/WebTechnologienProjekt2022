@@ -1,5 +1,5 @@
-#Semesterabgabe im Fach Webtechnologien mit dem Titel "Quiz MI"
-*Beinhaltet eine Quiz Applikation 
+# Semesterabgabe im Fach Webtechnologien mit dem Titel "Quiz MI"
+* Beinhaltet eine Quiz Applikation 
 
 # Installieren
 
