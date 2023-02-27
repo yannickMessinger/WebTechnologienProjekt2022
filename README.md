@@ -1,5 +1,9 @@
 # Semesterabgabe im Fach Webtechnologien mit dem Titel "Quiz MI"
-* Beinhaltet eine Quiz Applikation 
+* Frontend: ReactJS
+* Backend: NodeJS + Express Framework
+* Kommunikation Frontend / Backend: Websockets, GraphQL, REST
+
+* Beinhaltet eine Quiz Applikation mit Chat Funktionalitaet.
 
 # Installieren
 
@@ -12,7 +16,7 @@
 * es gibt im Ordner "data_examples" zwei JSON-Dateien, die mit Datensaetzen gefuellt sind, damit man diese nicht einzeln zuerst eingeben muss, um zu spielen. Diese braucht man nur in den mongoDB Compass zu importieren.
 
 ## Backend starten: 
-* in den Ordner /backend wechseln
+* in den Ordner /backend navigieren
 * mit `nodemon server` oder `node server` starten
 
 
